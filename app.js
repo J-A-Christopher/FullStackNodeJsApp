@@ -10,6 +10,8 @@ const Product = require('./models/product');
 const User = require('./models/users');
 const Cart = require('./models/cart');
 const CartItem = require('./models/cart-item');
+const Order = require('./models/order');
+const OrderItem = require('./models/order-item');
 
 
 
@@ -47,6 +49,9 @@ Product.belongsToMany(Cart, {
   //Tells sequelize where these connections are to be stored
   through: CartItem
 });
+Order.belongsTo(User);
+User.hasMany(Order);
+Order.belongsToMany(Product, {through: OrderItem});
 //sequelize.sync({force:true})
   sequelize.sync()
   .then((result) =>{
