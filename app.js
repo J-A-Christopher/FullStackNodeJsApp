@@ -1,5 +1,5 @@
 const mongoConnect = require('./util/database').mongoConnect;
- const adminRoutes = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const express = require('express');
 const bodyParser = require('body-parser');
