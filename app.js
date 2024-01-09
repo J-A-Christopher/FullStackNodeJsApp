@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const errorController = require('./controllers/error');
 
-//const User = require('./models/users');
+const User = require('./models/users');
 
 
 
@@ -21,11 +21,13 @@ app.set('views','views');
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next)=>{
-  // User.findByPk(1).then(user =>{
-  //   req.user = user;
-  //   next();
-  // }).catch(err=>console.log(err));
-  next();
+  User.findById('659c5bbf86a8e66878f87f36').then(user => {
+    //Here
+    req.user = new User(user.name, user.email, user.cart, user._id)
+    
+    next();
+  }).catch(err=>console.log(err));
+
 
 });
 
